@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 import requests
+import os
 
 # Define the Blueprint
 api_blueprint = Blueprint('api', __name__)
@@ -29,6 +30,27 @@ def query():
 
     # Step 3: Return assembled response
     return assemble_response(model= data['model'], prompt = data['prompt'], external_response=external_response)
+
+# New Route for /api/upload to handle PDF uploads
+@api_blueprint.route('/upload', methods=['POST'])
+def upload_pdf():
+    # Check if a file is part of the request
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part in the request"}), 400
+
+    file = request.files['file']
+
+    # Check if the file has a valid PDF filename
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+    if not file.filename.lower().endswith('.pdf'):
+        return jsonify({"error": "File must be a PDF"}), 400
+
+    # Save the file to the designated directory
+    file_path = os.path.join("./pdfs", file.filename)
+    file.save(file_path)
+
+    return jsonify({"message": f"File '{file.filename}' uploaded successfully"}), 200
 
 def validate_input(request):
     """Validate incoming JSON data for 'model' and 'prompt'."""

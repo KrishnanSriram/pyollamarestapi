@@ -1,0 +1,17 @@
+### Root
+GET http://localhost:5000/api
+
+
+### About
+
+GET http://localhost:5000/api/about
+
+### query
+
+POST http://localhost:5000/api/query
+Content-Type: application/json
+
+{
+    "model": "llama3.1",
+    "prompt": "Why is the ocean blue"
+}

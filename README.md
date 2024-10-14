@@ -24,7 +24,7 @@ Here are some reasons why LLAMA is useful for document scanning:
 Our objective in this article is to use OLLAMA to run locally and process simple document with a LLAMA 3.1. We'll use Chroma DB for embeddings. 
 
 ### Architecture
-
+[High level architecture] (https://github.com/KrishnanSriram/pyollamarestapi/blob/main/ollama_py_chroma.jpg)
 
 ### Cloud alternatives
 If you want to not have anything build from scratch and want to run it from cloud, you do have some great choices in the form of Azure Open AI, Amazon Bedrock etc..
